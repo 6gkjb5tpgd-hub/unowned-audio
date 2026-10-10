@@ -1,0 +1,4 @@
+/* Colour scaffold only. Light is the default. Replace or override in style.css. */
+:root,[data-theme="light"]{color-scheme:light;--bg:#e6e2df;--fg:#000}
+[data-theme="dark"]{color-scheme:dark;--bg:#000;--fg:#fff}
+body{background:var(--bg);color:var(--fg)}

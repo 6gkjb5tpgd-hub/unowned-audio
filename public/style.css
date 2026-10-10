@@ -1,0 +1,158 @@
+/* Unowned Audio: style.css
+   Accessibility choices:
+   - Light default, dark chosen by the visitor (button sets data-theme on <html>).
+   - Pure luminance contrast: light mode text 15:1 or better, dark mode text about 7:1 (soft grey on black). Meaning never depends on colour alone.
+   - Big text (20px base), rem units everywhere so it scales with zoom and browser settings.
+   - Thick borders and underlines, 4px focus ring, 44px minimum targets.
+   - One column, no fixed widths, so 400% zoom reflows without sideways scroll.
+   - No animation. Works with Windows forced-colors mode. */
+
+:root, [data-theme="light"] {
+  color-scheme: light;
+  --bg: #e6e2df; --fg: #000000; --mut: #3a3a3a;
+  --accent: #000000; --panel: #eeeeee; --line: #000000;
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #000000; --fg: #9a9a9a; --mut: #9a9a9a;
+  --accent: #9a9a9a; --panel: #111111; --line: #9a9a9a;
+}
+:root {
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --bar: 0.375rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { font-size: 125%; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background-color: var(--bg); color: var(--fg); font: 1rem/1.65 var(--sans); overflow-wrap: break-word; }
+
+/* Skip link: hidden until focused */
+a[href="#main"] { position: absolute; left: 0.5rem; top: -6rem; z-index: 10; padding: 0.75rem 1rem; background: var(--fg); color: var(--bg); font-weight: 700; }
+a[href="#main"]:focus { top: 0.5rem; }
+
+/* Header: heavy bar, CCC-style */
+header { border-bottom: var(--bar) solid var(--accent); padding: 1rem 1rem 0.5rem; max-width: 52rem; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 0 1rem; }
+header nav { flex: 1 0 100%; display: flex; align-items: flex-start; gap: 0 1.5rem; }
+header nav ul { flex: 0 1 auto; }
+header nav #theme-slot { flex: none; align-self: flex-start; margin: 0; }
+header p { margin: 0 0 0.5rem; font: 800 1.5rem/1.2 var(--mono); }
+header img { display: block; max-width: 100%; height: auto; }
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+nav a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 700; }
+#theme-slot { padding: 0; align-self: center; margin-bottom: 0.5rem; }
+
+main { max-width: 40rem; margin: 0 auto; padding: 2rem 1rem 3rem; }
+footer { max-width: 40rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; border-top: var(--bar) solid var(--fg); color: var(--mut); font-size: 0.9rem; }
+footer a { color: inherit; }
+
+/* Type */
+h1, h2, h3 { line-height: 1.15; margin: 0 0 0.75rem; }
+h1 { font: 800 clamp(2.5rem, 12vw, 4rem)/1 var(--mono); letter-spacing: -0.02em; margin-bottom: 1rem; }
+h2 { font: 800 1.75rem/1.15 var(--mono); margin-top: 3rem; padding-top: 1rem; border-top: var(--bar) solid var(--fg); }
+h3 { font: 700 1.2rem/1.25 var(--sans); margin-top: 1.75rem; }
+/* "# " marker like HackThisSite. The empty alt after the slash keeps screen readers from reading it. */
+h2::before { content: "# "; content: "# " / ""; color: var(--accent); }
+h1:focus, h2:focus { outline: none; }
+p, ul, ol, dl { margin: 0 0 1rem; }
+ul, ol { padding-left: 1.5rem; }
+li { margin-bottom: 0.4rem; }
+li::marker { font-weight: 700; }
+strong { font-weight: 800; }
+.lead, main > h1 + p { font-size: 1.2rem; }
+
+/* Links: always underlined, thick */
+a { color: var(--accent); text-decoration: none; }
+/* Hover thickens the box inward with a shadow, so nothing changes size and nothing around it moves */
+a:hover { box-shadow: inset 0 0 0 0.125rem currentColor; }
+/* Clickable = boxed. Wraps cleanly across lines. Logo and skip link opt out. */
+a { border: 0.125rem solid currentColor; padding: 0.1rem 0.35rem; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+header p a, a[href="#main"] { border: 0; padding: 0; }
+header p a:hover, a[href="#main"]:hover { box-shadow: none; }
+a[href="#main"] { padding: 0.75rem 1rem; }
+
+/* Focus: ring in the text colour with a gap, visible on any background */
+:focus-visible { outline: 0.25rem solid var(--fg); outline-offset: 0.2rem; }
+
+/* Images */
+img { max-width: 100%; height: auto; }
+figure { margin: 1.5rem 0; }
+figcaption { color: var(--mut); font-size: 0.9rem; margin-top: 0.4rem; }
+
+/* Code */
+code, pre { font-family: var(--mono); font-size: 0.9rem; }
+code { background: var(--panel); padding: 0.1rem 0.3rem; }
+pre { background: var(--panel); border: 0.1875rem solid var(--line); padding: 1rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+pre code { background: none; padding: 0; }
+
+/* Forms */
+label { display: block; font-weight: 700; margin-bottom: 0.25rem; }
+input, select, textarea { font: inherit; color: var(--fg); background: var(--bg); border: 0.1875rem solid var(--line); border-radius: 0; padding: 0.6rem 0.75rem; width: 100%; max-width: 32rem; min-height: 2.75rem; }
+textarea { min-height: 6rem; }
+input[readonly] { background: var(--panel); font-family: var(--mono); }
+button { font: 700 1rem/1.2 var(--sans); color: var(--bg); background: var(--fg); border: 0.1875rem solid var(--fg); border-radius: 0; padding: 0.6rem 1.1rem; min-height: 2.75rem; cursor: pointer; }
+button:hover { background: var(--bg); color: var(--fg); }
+button[aria-pressed="true"] { background: var(--bg); color: var(--fg); border-color: var(--fg); }
+button[aria-pressed="true"]:hover { background: var(--fg); color: var(--bg); }
+button[aria-pressed="true"]::before { content: "On: " / ""; }
+li button { margin: 0.25rem 0.5rem 0.25rem 0; }
+
+/* Status messages: text plus a thick bar, not colour alone */
+[role="status"] { margin: 1rem 0; padding: 0.75rem 1rem; border-left: var(--bar) solid var(--fg); background: var(--panel); font-weight: 700; }
+[role="status"]:empty { display: none; }
+
+/* Contribution cards */
+#public-list ul, #mine ul { list-style: none; padding: 0; }
+#public-list li, #mine li { border: 0.1875rem solid var(--line); padding: 1rem; margin-bottom: 1rem; }
+#public-list h3, #mine h3 { margin-top: 0; }
+#public-list p:last-child, #mine li p:last-of-type { margin-bottom: 0.5rem; }
+
+/* Admin table: simple and bordered. Wraps rather than scrolling. */
+table { width: 100%; border-collapse: collapse; table-layout: auto; }
+caption { text-align: left; font-weight: 800; margin-bottom: 0.5rem; }
+th, td { border: 0.125rem solid var(--line); padding: 0.5rem; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+thead th { background: var(--panel); }
+@media (max-width: 40rem) { main:has(table) { max-width: none; } th, td { font-size: 0.85rem; padding: 0.35rem; } }
+
+/* Windows high contrast and similar */
+@media (forced-colors: active) {
+  button, input, select, textarea, #public-list li, #mine li { border: 0.1875rem solid ButtonText; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+@media print { header nav, #theme-slot { display: none; } body { background: #fff; color: #000; } }
+
+/* Uppercase look without typing capitals into the HTML (screen readers read normal words) */
+h1, h2, h3, nav a { text-transform: uppercase; }
+h3 strong { text-decoration: underline; text-decoration-thickness: 0.15em; text-underline-offset: 0.15em; }
+
+/* Button rows on cards and admin table */
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0 0; }
+.actions button, li .actions button { margin: 0; }
+nav[aria-label="Your account sections"] { margin-bottom: 1rem; }
+th span { font-weight: 700; }
+
+/* Wallpaper: light mode only. cover = fills the screen, keeps proportions, crops instead of stretching.
+   The middle of the image is deliberately empty so text sits on a calm area. Dark mode has its own picture. Print and
+   forced-colors keep a plain background so contrast never depends on the picture. */
+body {
+  background-image: url("wallpaper.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+[data-theme="dark"] body { background-image: url("wallpaper-dark.webp"); }
+@media print { body { background-image: none; } }
+
+/* Dark mode logo: same single svg, recoloured to #9a9a9a by the filter that theme.js adds. */
+[data-theme="dark"] img[src="unowned-audio.svg"] { filter: url("#unowned-audio-orange"); }
+
+/* Theme button: icon only. Moon in light mode (go dark), sun in dark mode (go light).
+   The name "Dark mode" is hidden text; aria-pressed says whether it's on. */
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+#theme-slot button { margin: 0; position: relative; display: inline-flex; align-items: center; justify-content: center; width: 2.75rem; height: 2.75rem; min-width: 0; min-height: 0; padding: 0; border-width: 0.125rem; }
+#theme-slot .ico { display: block; width: 1.5rem; height: 1.5rem; }
+#theme-slot .ico-sun, #theme-slot button[aria-pressed="true"] .ico-moon { display: none; }
+#theme-slot button[aria-pressed="true"] .ico-sun { display: block; }
+#theme-slot button[aria-pressed="true"]::before { content: none; }
