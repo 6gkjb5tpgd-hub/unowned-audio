@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contribute – Unowned Audio</title>
+<meta name="color-scheme" content="light dark">
+<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a href="#main">Skip to main content</a>
+<header>
+  <p><a href="/">Unowned Audio</a></p>
+  <div id="theme-slot"></div>
+</header>
+<main id="main">
+  <h1 id="main-h" tabindex="-1">Contribute</h1>
+  <p id="status" role="status" aria-live="polite"></p>
+
+  <div id="signed-out">
+    <section aria-labelledby="new-h">
+      <h2 id="new-h">Create an account</h2>
+      <p>You get a random key. It's your login. We don't ask for an email or a name, so we can't recover it. Save it somewhere safe, such as a password manager.</p>
+      <form id="signup">
+        <p><label for="newhandle">Display name (optional)</label><br>
+        <input id="newhandle" type="text" maxlength="30" autocomplete="off"></p>
+        <p id="newhandle-hint">Pick something that can't be linked to you elsewhere.</p>
+        <p><button type="submit">Create account</button></p>
+      </form>
+    </section>
+    <section aria-labelledby="in-h">
+      <h2 id="in-h">Log in</h2>
+      <form id="login">
+        <p><label for="key">Your key</label><br>
+        <input id="key" type="password" autocomplete="current-password" required></p>
+        <p><button type="submit">Log in</button></p>
+      </form>
+    </section>
+  </div>
+
+  <section id="keypanel" aria-labelledby="key-h" hidden>
+    <h2 id="key-h" tabindex="-1">Your key</h2>
+    <p>This is the only time we show it. Save it now. Without it you can't get back in.</p>
+    <p><label for="keyval">Account key</label><br>
+    <input id="keyval" type="text" readonly size="40"></p>
+    <p><button type="button" id="savekey">Download key as a text file</button></p>
+    <p><button type="button" id="keydone">I've saved my key, continue</button></p>
+  </section>
+
+  <div id="signed-in" hidden>
+    <p id="welcome"></p>
+    <nav aria-label="Your account sections">
+      <ul>
+        <li><a href="#mine-h">Your contributions</a></li>
+        <li><a href="#bm-h">Your bookmarks</a></li>
+        <li><a href="#form-h">Add a contribution</a></li>
+        <li><a href="#acct-h">Your account</a></li>
+      </ul>
+    </nav>
+    <section aria-labelledby="mine-h">
+      <h2 id="mine-h">Your contributions</h2>
+      <div id="mine"></div>
+    </section>
+    <section aria-labelledby="bm-h">
+      <h2 id="bm-h">Your bookmarks</h2>
+      <p>Only you can see these.</p>
+      <div id="bookmarks"></div>
+    </section>
+    <section aria-labelledby="form-h">
+      <h2 id="form-h">Add a contribution</h2>
+      <form id="cform">
+        <p><label for="title">Title</label><br><input id="title" name="title" type="text" maxlength="120" required></p>
+        <p><label for="author">Author of the text</label><br><input id="author" name="author" type="text" maxlength="120"></p>
+        <p><label for="status-sel">Status</label><br>
+        <select id="status-sel" name="status"><option value="claimed">Claimed, not recorded yet</option><option value="published">Published on archive.org</option></select></p>
+        <p><label for="archive_url">archive.org link (needed when published)</label><br><input id="archive_url" name="archive_url" type="url" maxlength="300" placeholder="https://archive.org/details/..."></p>
+        <p><label for="licence_note">Rights: licence or public domain, with a link to the evidence</label><br><textarea id="licence_note" name="licence_note" rows="3" maxlength="600"></textarea></p>
+        <p><label for="content_notes">Content notes (optional)</label><br><textarea id="content_notes" name="content_notes" rows="2" maxlength="400"></textarea></p>
+        <p><button type="submit">Save</button> <button type="button" id="cancel" hidden>Cancel edit</button></p>
+      </form>
+    </section>
+    <section aria-labelledby="acct-h">
+      <h2 id="acct-h">Your account</h2>
+      <form id="hform">
+        <p><label for="handle">Display name</label><input id="handle" type="text" maxlength="30" autocomplete="off"></p>
+        <p><button type="submit">Save name</button></p>
+      </form>
+      <p><button type="button" id="logout">Log out</button></p>
+      <p><button type="button" id="delacct">Delete my account and contributions</button></p>
+    </section>
+  </div>
+</main>
+<footer><p><a href="/#values">Values</a> · <a href="/#rights">Rights</a> · <a href="/#privacy">Privacy</a></p></footer>
+<script src="theme.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
